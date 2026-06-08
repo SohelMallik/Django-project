@@ -2,13 +2,25 @@ from django.shortcuts import render
 
 # Views connect with Templates
 def homepage(request):
-    return render(request, 'main.html', {})
+    context={
+        'page' :'homepage'
+    }
+    return render(request, 'main.html', context)
 
 def aboutus(request):
-    return render(request, 'aboutus.html', {})
+    context={
+        'page' :'aboutus page'
+    }
+    return render(request, 'aboutus.html', context)
 
 def contact(request):
-    return render(request, 'contact.html', {})
+    context={
+        'page' :'contact page'
+    }
+    return render(request, 'contact.html', context)
 
 def todolist(request):
-    return render(request, 'todolist.html', {})
+    context={
+        'page' :'todolist page'
+    }
+    return render(request, 'todolist.html', context)
