@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Task #Import Task model from models.py
 
 # Views connect with Templates
 def homepage(request):
@@ -19,8 +20,13 @@ def contact(request):
     }
     return render(request, 'contact.html', context)
 
+
 def todolist(request):
+
+    all_tasks= Task.objects.all() # get all the tasks from database as Objects
+
     context={
-        'page' :'todolist page'
+        'page' :'todolist page',
+        'all_tasks': all_tasks,
     }
     return render(request, 'todolist.html', context)

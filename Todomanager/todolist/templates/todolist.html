@@ -7,3 +7,12 @@ Todo List
 {% block heading %}
 Welcome to {{page}}
 {% endblock heading %}
+
+{% block content%}
+<ul>
+    {% for task in all_tasks %}
+        <li>{{ task.task }} - {{task.is_completed}}  </li>
+         <br>
+    {% endfor %}
+</ul>
+{% endblock content %}
