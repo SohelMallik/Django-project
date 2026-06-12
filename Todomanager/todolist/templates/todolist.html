@@ -10,8 +10,8 @@ Welcome to {{page}}
 
 {% block content%}
 <ul>
-   <table class="table">
-  <thead>
+   <table class="table table-bordered border-primary">
+  <thead class="table-dark">
     <tr>
       <th scope="col">Serial No</th>
       <th scope="col">Task Name</th>
@@ -21,14 +21,25 @@ Welcome to {{page}}
     </tr>
   </thead>
   <tbody>
+    
     {% for task in all_tasks %}
-    <tr>
+    {% if task.is_completed %}
+    <tr class="table-success">
       <th scope="row">{{ forloop.counter }}</th>
       <td>{{ task.task }}</td>
-      <td>{{ task.is_completed }}</td>
+      <td>{{ 'Completed' }}</td>
       <td><a href="#" class="btn btn-primary btn-sm">Edit</a></td>
       <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>
     </tr>
+    {% else %}
+     <tr class="table-danger">
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ task.task }}</td>
+      <td>{{ 'Not Completed' }}</td>
+      <td><a href="#" class="btn btn-primary btn-sm">Edit</a></td>
+      <td><a href="#" class="btn btn-danger btn-sm">Delete</a></td>
+    </tr>
+    {% endif %}
     {% endfor %}
   </tbody>
 </table>
