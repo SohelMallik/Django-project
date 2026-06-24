@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Task #Import Task model from models.py
+
+from todolist.forms import TaskForm #Import TaskForm from forms.py
 
 # Views connect with Templates
 def homepage(request):
@@ -22,6 +24,13 @@ def contact(request):
 
 
 def todolist(request):
+
+    if request.method=="POST":
+        from_data=TaskForm(request.POST or None)
+        if from_data.is_valid():
+            from_data.save() #Save the data to database
+            return redirect("todolist") #Redirect to todolist page after saving the data
+
 
     all_tasks= Task.objects.all() # get all the tasks from database as Objects
 
