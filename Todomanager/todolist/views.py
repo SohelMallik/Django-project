@@ -23,9 +23,9 @@ def contact(request):
     return render(request, 'contact.html', context)
 
 
-def todolist(request):
+def todolist(request):# For save data to database
 
-    if request.method=="POST":
+    if request.method=="POST":# POST Means Create data to DB
         from_data=TaskForm(request.POST or None)
         if from_data.is_valid():
             from_data.save() #Save the data to database

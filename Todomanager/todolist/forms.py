@@ -6,4 +6,4 @@ class TaskForm(forms.ModelForm):
         model=Task
         fields=['task', 'is_completed'] # __all__
 
-#From todolist.html name=task is same as this forms.py task
+#From todolist.html name=task is same as this forms.py task name.
