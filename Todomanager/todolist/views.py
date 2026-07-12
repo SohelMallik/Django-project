@@ -1,3 +1,5 @@
+from multiprocessing import context
+
 from django.shortcuts import redirect, render
 from .models import Task #Import Task model from models.py
 
@@ -50,3 +52,26 @@ def delete_task(request, task_id):# For Delete data from database
     task.delete() # Delete the task from database
     messages.success(request, "Task deleted successfully!")# Display success message
     return redirect("todolist") #Redirect to todolist page after deleting the data
+
+
+def edit_task(request, task_id):# For Edit data from database
+    task_obj = Task.objects.get(id=task_id)# Get the task object by ID from database
+    if request.method == "POST": 
+        form = TaskForm(request.POST or None, instance=task_obj)#For Not Create new data put the instance=task_obj to update the existing data
+
+        if form.is_valid():
+            form.save()# Save the updated data to database
+            messages.success(request, "Task updated successfully!")
+            return redirect("todolist")
+        
+        messages.error(request, "Failed to update task. Please check the form for errors.")
+
+    else:
+        form = TaskForm(instance=task_obj)
+
+    context = {                                                    
+        'form': form,
+        'task_obj': task_obj,
+    }
+
+    return render(request, 'edit.html', context)
