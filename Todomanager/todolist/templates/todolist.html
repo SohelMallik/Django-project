@@ -11,6 +11,7 @@ Welcome to {{page}}
 {% block content%}
 <ul>
   <br>
+
   <!-- Messages -->
 {% if messages %}
     {% for message in messages %}
@@ -24,6 +25,7 @@ Welcome to {{page}}
         </div>
     {% endfor %}
 {% endif %}
+
   <!--From Start-->
   <form method="post">  <!--1> Define Method of From is POST-->
     {% csrf_token %}<!--2> Add CSRF Token-->
@@ -55,6 +57,7 @@ Welcome to {{page}}
       <td>{{ task.task }}</td>
       <td>{{ 'Completed' }}</td>
       <td><a href="#" class="btn btn-primary btn-sm">Edit</a></td>
+
        <!-- For Deleting, Create Delete URL -->
       <td>
         <a href="{% url 'delete_task' task.id %}"
