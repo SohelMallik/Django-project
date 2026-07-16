@@ -29,7 +29,7 @@ def contact(request):
 def todolist(request):# For save data to database
 
     if request.method=="POST":# POST Means Create data to DB
-        from_data=TaskForm(request.POST or None)
+        from_data=TaskForm(request.POST or None)# Create New task 
         if from_data.is_valid():
             from_data.save() #Save the data to database
             messages.success(request, "Task added successfully!")# Display success message
@@ -53,23 +53,27 @@ def delete_task(request, task_id):# For Delete data from database
     messages.success(request, "Task deleted successfully!")# Display success message
     return redirect("todolist") #Redirect to todolist page after deleting the data
 
+#For Edit data from database
+def edit_task(request, task_id):  # For Edit data from database
+    task_obj = Task.objects.get(id=task_id)
 
-def edit_task(request, task_id):# For Edit data from database
-    task_obj = Task.objects.get(id=task_id)# Get the task object by ID from database
-    if request.method == "POST": 
-        form = TaskForm(request.POST or None, instance=task_obj)#For Not Create new data put the instance=task_obj to update the existing data
+    if request.method == "POST":  # Handle both PUT and POST requests
+        form = TaskForm(request.POST or None, instance=task_obj)
 
-        if form.is_valid():
-            form.save()# Save the updated data to database
+        # Check if task field is empty
+        if not request.POST.get('task', '').strip():
+            messages.error(request, "You did not write anything!")
+        elif form.is_valid():#From is Valid check
+            form.save()#Save the data to database
             messages.success(request, "Task updated successfully!")
             return redirect("todolist")
-        
-        messages.error(request, "Failed to update task. Please check the form for errors.")
+        else:
+            messages.error(request, "Failed to update task. Please check the form for errors.")
 
     else:
         form = TaskForm(instance=task_obj)
 
-    context = {                                                    
+    context = {
         'form': form,
         'task_obj': task_obj,
     }
