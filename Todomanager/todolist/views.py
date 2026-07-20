@@ -79,3 +79,11 @@ def edit_task(request, task_id):  # For Edit data from database
     }
 
     return render(request, 'edit.html', context)
+
+#Marking a task as complete
+def complete_task(request, task_id):  # For Marking a task as complete
+    task=Task.objects.get(id=task_id)  # Get the task object by ID
+    task.is_completed = True
+    task.save()
+    messages.success(request, "Task marked as complete!")
+    return redirect("todolist")
