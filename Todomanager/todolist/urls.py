@@ -6,9 +6,11 @@ urlpatterns = [
     path('contactus/', views.contact, name='contact'),
     path('about/', views.aboutus, name='aboutus'),
     path('todolist/', views.todolist, name='todolist'),
-    path('delete/<int:task_id>/', views.delete_task, name='delete_task'),
-    path('edit/<int:task_id>/', views.edit_task, name='edit_task'),
-    path('complete/<int:task_id>/', views.complete_task, name='complete_task'),
+    path('todolist/delete/<int:task_id>/', views.delete_task, name='delete_task'),
+    path('todolist/edit/<int:task_id>/', views.edit_task, name='edit_task'),
+    path('todolist/complete/<int:task_id>/', views.complete_task, name='complete_task'),
+    path('todolist/pending/<int:task_id>/', views.pending_task, name='pending_task'),
+    path('subbmit_contact/', views.submit_contact, name='submit_contact'),
 
 
 
