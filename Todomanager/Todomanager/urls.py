@@ -17,9 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
 urlpatterns = [
+    # Django Admin Panel
     path('admin/', admin.site.urls),
-    path('', include('todolist.urls'))# see Kon App ar satha connected a6a 
-    
-    
+
+    # connect with Todolist App URLs
+    path('', include('todolist.urls')),
+
+    #Connect with Users App URLs
+    path('account/', include('users.urls')),
 ]
